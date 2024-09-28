@@ -24,6 +24,7 @@ namespace MauiApp2
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
         builder.Services.AddSingleton<IMap>(Map.Default);
 
+        builder.Services.AddSingleton<Login>();
         builder.Services.AddSingleton<UserService>();
 
 		builder.Services.AddSingleton<UsersViewModel>();

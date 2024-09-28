@@ -7,14 +7,18 @@ public partial class UsersViewModel : BaseViewModel
 {
 
     UserService userService;
+
+    Login login;
+
     public ObservableCollection<User> Users { get; } = new();
 
     IConnectivity connectivity;
     IGeolocation geolocation;
 
-    public UsersViewModel(UserService userService, IConnectivity connectivity, IGeolocation geolocation)
+    public UsersViewModel(UserService userService, Login login, IConnectivity connectivity, IGeolocation geolocation)
     {
         Title = "User Finder";
+        this.login = login;
         this.userService = userService;
         this.connectivity = connectivity;
         this.geolocation = geolocation;
@@ -84,6 +88,38 @@ public partial class UsersViewModel : BaseViewModel
             Debug.WriteLine(ex);
             await Shell.Current.DisplayAlert("Error!", 
                 $"Unable to get Users: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
+    }
+
+    [RelayCommand]
+    async Task GetLoginAsync()
+    {
+        if (IsBusy)
+            return;
+
+        try
+        {
+            if (connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Internet Issue!",
+                     $"Check your internet and try again!", "OK");
+                return;
+            }
+            IsBusy = true;
+            var users = await login.GetLogin();
+
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert("Error!",
+                $"Unable to Login: {ex.Message}", "OK");
         }
         finally
         {

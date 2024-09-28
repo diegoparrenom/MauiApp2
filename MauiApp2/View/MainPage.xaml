@@ -66,22 +66,30 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        
+
+        <Button Text="Login"
+                Style="{StaticResource ButtonOutline}"
+                Command="{Binding GetLoginCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="8"/>
 
         <Button Text="Get Users"
                 Style="{StaticResource ButtonOutline}"
                 Command="{Binding GetUsersCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
+                Grid.Column="1"
                 Margin="8"/>
 
-        <Button Text="Find Closest"
+        <!--<Button Text="Find Closest"
                 Style="{StaticResource ButtonOutline}"
                 Command="{Binding GetClosestUserCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="8"/>
+                Margin="8"/>-->
 
         <ActivityIndicator IsVisible="{Binding IsBusy}" 
                            IsRunning="{Binding IsBusy}"
