@@ -1,5 +1,6 @@
 ﻿
 using MauiApp2.Services;
+using MauiApp2.View;
 
 namespace MauiApp2.ViewModel;
 
@@ -111,8 +112,23 @@ public partial class UsersViewModel : BaseViewModel
                 return;
             }
             IsBusy = true;
-            var users = await login.GetLogin();
+            var token = await login.GetLogin();
 
+            //User usert = new User() {
+            //    id = 12,
+            //    email = token,
+            //    first_name = "diego",
+            //    last_name = "parreno",
+            //    avatar = "https://reqres.in/img/faces/12-image.jpg"
+            //};
+
+            //await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
+            //new Dictionary<string, object>
+            //{
+            //    {"User",usert }
+            //});
+
+            await Shell.Current.GoToAsync($"{nameof(MainAccountPage)}", true);
 
         }
         catch (Exception ex)

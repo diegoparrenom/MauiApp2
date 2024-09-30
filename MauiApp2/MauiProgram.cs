@@ -32,6 +32,8 @@ namespace MauiApp2
 
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddTransient<DetailsPage>();
+        builder.Services.AddTransient<MainAccountPage>();
+            
 
             return builder.Build();
         }
