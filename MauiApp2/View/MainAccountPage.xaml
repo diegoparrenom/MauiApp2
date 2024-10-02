@@ -6,31 +6,61 @@
              x:Class="MauiApp2.View.MainAccountPage"
              Title="MainAccountPage"
              x:DataType="viewmodel:UsersViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding GenresList[0]}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <Grid RowDefinitions="60,*" >
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="auto,*,50" >
 
-        <CollectionView ItemsSource="{Binding GenresList}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                       <Label Grid.Column="1"
-                       Text="{Binding .}"
-                       FontAttributes="Bold" />
-                       
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+            <Border Stroke="#C49B33"
+                StrokeThickness="4"
+                StrokeShape="RoundRectangle 40,0,0,40"
+                Background="LightYellow"
+                Padding="8,4"
+                HorizontalOptions="Center">
+                <Grid Grid.Column="0"
+                      ColumnDefinitions="auto,auto"  
+                      Margin="0" Padding="0">
+                    <Image Source="musicicon.png"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Aspect="AspectFill"
+                        Grid.Column="0"/>
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="MusicApp"
+                        Style="{StaticResource LargeLabel}"/>
+                </Grid>
+            </Border>
+            <Entry x:Name="entry"
+                Grid.Column="1"
+               Placeholder="SearchSong" />
+            <Image Source="searchicon.png"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                Aspect="AspectFill"
+                Grid.Column="2"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding GenresList}"
+                            VerticalOptions="Start"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical" Grid.Row="1">
+                            <Frame HeightRequest="30" 
+                                Padding="2" 
+                                Margin="2"
+                                Style="{StaticResource CardView}">
+                                <Label Grid.Column="1"
+                                    Text="{Binding .}"
+                                    FontAttributes="Bold" 
+                                    Style="{StaticResource MediumLabel}"/>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>
