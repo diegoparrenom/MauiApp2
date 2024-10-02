@@ -11,16 +11,22 @@ public partial class UsersViewModel : BaseViewModel
 
     Login login;
 
+    AccountInfo accountInfo;
+
     public ObservableCollection<User> Users { get; } = new();
+
+    public ObservableCollection<string> GenresList { get; } = new();
 
     IConnectivity connectivity;
     IGeolocation geolocation;
 
-    public UsersViewModel(UserService userService, Login login, IConnectivity connectivity, IGeolocation geolocation)
+    public UsersViewModel(UserService userService, Login login, AccountInfo accountInfo,
+        IConnectivity connectivity, IGeolocation geolocation)
     {
         Title = "User Finder";
         this.login = login;
         this.userService = userService;
+        this.accountInfo = accountInfo; 
         this.connectivity = connectivity;
         this.geolocation = geolocation;
     }
@@ -114,19 +120,9 @@ public partial class UsersViewModel : BaseViewModel
             IsBusy = true;
             var token = await login.GetLogin();
 
-            //User usert = new User() {
-            //    id = 12,
-            //    email = token,
-            //    first_name = "diego",
-            //    last_name = "parreno",
-            //    avatar = "https://reqres.in/img/faces/12-image.jpg"
-            //};
-
-            //await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
-            //new Dictionary<string, object>
-            //{
-            //    {"User",usert }
-            //});
+            var genres_list = await accountInfo.GetGenres(token);
+            foreach (var gen in genres_list)
+                GenresList.Add(gen);
 
             await Shell.Current.GoToAsync($"{nameof(MainAccountPage)}", true);
 
