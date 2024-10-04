@@ -2,7 +2,7 @@ namespace MauiApp2.View;
 
 public partial class MainAccountPage : ContentPage
 {
-	public MainAccountPage(UsersViewModel viewModel)
+	public MainAccountPage(MainAccountViewModel viewModel)
 	{
 		InitializeComponent();
         BindingContext = viewModel;

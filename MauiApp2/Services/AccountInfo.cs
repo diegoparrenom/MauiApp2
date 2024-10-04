@@ -18,6 +18,10 @@ namespace MauiApp2.Services
 
         List<string> genresList = new();
 
+        PlaylistGroup playlist_group = new();
+
+        Playlist playlist=new();    
+
         public AccountInfo()
         {
             httpClient = new HttpClient();
@@ -39,6 +43,39 @@ namespace MauiApp2.Services
             }
 
             return genresList;
+        }
+        public async Task<PlaylistGroup> GetFeaturedPlaylist(string token)
+        {
+            var url = "https://api.spotify.com/v1/browse/featured-playlists";
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                playlist_group = await response.Content.ReadFromJsonAsync<PlaylistGroup>();
+
+            }
+            return playlist_group;
+        }
+
+        public async Task<Playlist> GetSinglePlaylist(string token,string userId)
+        {
+            var url = "https://api.spotify.com/v1/playlists/"+userId;
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                playlist = await response.Content.ReadFromJsonAsync<Playlist>();
+
+            }
+            return playlist;
         }
     }
 }

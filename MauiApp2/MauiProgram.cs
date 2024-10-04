@@ -30,7 +30,8 @@ namespace MauiApp2
 
 
         builder.Services.AddSingleton<UsersViewModel>();
-		builder.Services.AddTransient<UserDetailsViewModel>();
+        builder.Services.AddSingleton<MainAccountViewModel>();
+        builder.Services.AddTransient<UserDetailsViewModel>();
 
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddTransient<DetailsPage>();

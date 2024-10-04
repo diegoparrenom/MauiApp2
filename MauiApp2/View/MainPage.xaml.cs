@@ -2,7 +2,7 @@
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(UsersViewModel viewModel)
+	public MainPage(MainAccountViewModel viewModel)
 	{
 		InitializeComponent();
 
