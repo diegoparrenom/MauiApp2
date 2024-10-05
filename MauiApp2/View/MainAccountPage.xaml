@@ -5,7 +5,7 @@
              xmlns:viewmodel ="clr-namespace:MauiApp2.ViewModel"
              x:Class="MauiApp2.View.MainAccountPage"
              Title="MainAccountPage">
-    <Grid RowDefinitions="60,auto,auto,*" >
+    <Grid RowDefinitions="60,auto,auto,*,auto,*" >
         <Grid Grid.Row="0" 
               ColumnDefinitions="auto,*,50" >
             <Border Stroke="#C49B33"
@@ -63,10 +63,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-        <Label Grid.Row="2"
-            Text="Listas Mas Populares"
-            FontAttributes="Bold" 
-            Style="{StaticResource MediumLabel}"/>
+        <Label Grid.Row="2" Text="Listas Mas Populares"
+            FontAttributes="Bold" Style="{StaticResource MediumLabel}"/>
         <ScrollView Grid.Row="3">
             <CollectionView ItemsSource="{Binding PlayListGroupItems}"
                             VerticalOptions="Start"
@@ -98,6 +96,37 @@
                                     FontAttributes="Bold" 
                                     BackgroundColor="LightBlue"
                                     Style="{StaticResource SmallLabel}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <Label Grid.Row="4" Text="Seleccion Rapida" Margin="0,0,0,10"
+            FontAttributes="Bold" Style="{StaticResource MediumLabel}"/>
+        <ScrollView Grid.Row="5">
+            <CollectionView ItemsSource="{Binding Playlist_item}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <Frame  Padding="2" Margin="2"
+                            Style="{StaticResource CardView}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToMusicPlayerCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="50,*">
+                                <Image Grid.Column="0"
+                                    Source="{Binding track.album.images[0].url}"/>
+                                <Grid Grid.Column="1" RowDefinitions="*,*" Margin="10,0,0,0">
+                                    <Label Grid.Row="0"
+                                       Text="{Binding track.name}"
+                                        FontAttributes="Bold" 
+                                        Style="{StaticResource MediumLabel}"/>
+                                    <Label Grid.Row="1"
+                                       Text="{Binding track.artists[0].name}"
+                                        FontAttributes="Bold" 
+                                        Style="{StaticResource SmallLabel}"/>
+                                </Grid>
                             </Grid>
                         </Frame>
                     </DataTemplate>

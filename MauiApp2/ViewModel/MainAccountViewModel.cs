@@ -74,4 +74,16 @@ public partial class MainAccountViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+    [RelayCommand]
+    async Task GoToMusicPlayerAsync(Playlist.Item item)
+    {
+        if (item is null)
+            return;
+
+        await Shell.Current.GoToAsync($"{nameof(PlayerPage)}", true,
+            new Dictionary<string, object>
+            {
+                {"PlaylistItem",item }
+            });
+    }
 }

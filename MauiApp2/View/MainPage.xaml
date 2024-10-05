@@ -18,7 +18,7 @@
                 Style="{StaticResource ButtonOutline}"
                 Command="{Binding GetLoginCommand}"
                 IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
+                Grid.Row="0"
                 Grid.Column="0"
                 Margin="8"/>
 

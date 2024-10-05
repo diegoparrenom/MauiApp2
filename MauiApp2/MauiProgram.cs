@@ -20,23 +20,23 @@ namespace MauiApp2
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
-        builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
-        builder.Services.AddSingleton<IMap>(Map.Default);
+		    builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+            builder.Services.AddSingleton<IMap>(Map.Default);
 
-        builder.Services.AddSingleton<Login>();
-        builder.Services.AddSingleton<UserService>();
-        builder.Services.AddSingleton<AccountInfo>(); 
+            builder.Services.AddSingleton<Login>();
+            builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<AccountInfo>(); 
 
+            builder.Services.AddSingleton<UsersViewModel>();
+            builder.Services.AddSingleton<MainAccountViewModel>();
+            builder.Services.AddTransient<UserDetailsViewModel>();
+            builder.Services.AddTransient<PlayerViewModel>();
 
-        builder.Services.AddSingleton<UsersViewModel>();
-        builder.Services.AddSingleton<MainAccountViewModel>();
-        builder.Services.AddTransient<UserDetailsViewModel>();
-
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddTransient<DetailsPage>();
-        builder.Services.AddTransient<MainAccountPage>();
-            
+            builder.Services.AddSingleton<MainPage>();
+		    builder.Services.AddTransient<DetailsPage>();
+            builder.Services.AddTransient<MainAccountPage>();
+            builder.Services.AddTransient<PlayerPage>();
 
             return builder.Build();
         }

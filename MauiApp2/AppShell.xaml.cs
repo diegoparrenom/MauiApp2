@@ -11,6 +11,7 @@ namespace MauiApp2
 		//nameof(DetailsPage) == "DetailsPage"
 		Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
         Routing.RegisterRoute(nameof(MainAccountPage), typeof(MainAccountPage));
+        Routing.RegisterRoute(nameof(PlayerPage), typeof(PlayerPage));
         }
     }
 }
