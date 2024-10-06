@@ -77,5 +77,24 @@ namespace MauiApp2.Services
             }
             return playlist;
         }
+
+        public async Task<Playlist> getPlayList(string token, string playListId)
+        {
+            var url = "https://api.spotify.com/v1/playlists/" + playListId;
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                           new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                playlist = await response.Content.ReadFromJsonAsync<Playlist>();
+
+            }
+
+            return playlist;
+        }
+        
     }
 }

@@ -11,6 +11,8 @@ public partial class MainAccountViewModel : BaseViewModel
 
     AccountInfo accountInfo;
 
+    String Token;
+
     public ObservableCollection<string> GenresList { get; } = new();
 
     public ObservableCollection<PlaylistGroup.Item> PlayListGroupItems { get; } = new();
@@ -44,17 +46,17 @@ public partial class MainAccountViewModel : BaseViewModel
                 return;
             }
             IsBusy = true;
-            var token = await login.GetLogin();
+            Token = await login.GetLogin();
 
-            var genres_list = await accountInfo.GetGenres(token);
+            var genres_list = await accountInfo.GetGenres(Token);
             foreach (var gen in genres_list)
                 GenresList.Add(gen);
 
-            var plau_lists = await accountInfo.GetFeaturedPlaylist(token);
+            var plau_lists = await accountInfo.GetFeaturedPlaylist(Token);
             foreach (var item in plau_lists.playlists.items)
                 PlayListGroupItems.Add(item);
 
-            var play_list = await accountInfo.GetSinglePlaylist(token, "3cEYpjA9oz9GiPac4AsH4n");
+            var play_list = await accountInfo.GetSinglePlaylist(Token, "3cEYpjA9oz9GiPac4AsH4n");
             foreach (var item in play_list.tracks.items)
                 Playlist_item.Add(item);
 
@@ -85,5 +87,37 @@ public partial class MainAccountViewModel : BaseViewModel
             {
                 {"PlaylistItem",item }
             });
+    }
+    [RelayCommand]
+    async Task GoToLoadPlaylist(PlaylistGroup.Item item)
+    {
+        if (IsBusy)
+            return;
+
+        try
+        {
+            IsBusy = true;
+
+            if (item is null)
+                return;
+
+            Playlist_item.Clear();
+
+            var play_list = await accountInfo.getPlayList(Token, item.id);
+            foreach (var playlist_item in play_list.tracks.items)
+                Playlist_item.Add(playlist_item);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert("Error!",
+                $"Unable to Login: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
+
     }
 }

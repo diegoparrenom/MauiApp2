@@ -9,41 +9,24 @@
              ios:Page.UseSafeArea="True"
              x:Class="MauiApp2.View.MainPage">
 
-    <Grid ColumnDefinitions="*,*"
-          ColumnSpacing="0"
-          RowDefinitions="*,Auto"
+    <Grid ColumnSpacing="0"
+          RowDefinitions="*,*"
           RowSpacing="0">
 
         <Button Text="Login"
                 Style="{StaticResource ButtonOutline}"
                 Command="{Binding GetLoginCommand}"
                 IsEnabled="{Binding IsNotBusy}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
                 Grid.Row="0"
-                Grid.Column="0"
                 Margin="8"/>
-
-        <!--<Button Text="Get Users"
-                Style="{StaticResource ButtonOutline}"
-                Command="{Binding GetUsersCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="8"/>-->
-
-        <!--<Button Text="Find Closest"
-                Style="{StaticResource ButtonOutline}"
-                Command="{Binding GetClosestUserCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="8"/>-->
 
         <ActivityIndicator IsVisible="{Binding IsBusy}" 
                            IsRunning="{Binding IsBusy}"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2"/>
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Grid.Row="1"/>
 
     </Grid>
 

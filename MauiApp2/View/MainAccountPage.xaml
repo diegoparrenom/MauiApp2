@@ -71,11 +71,13 @@
                             ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame WidthRequest="150"
-                               Padding="2" 
-                                Margin="2"
+                        <Frame WidthRequest="150" Padding="2"  Margin="2"
                                BackgroundColor="LightBlue"
-                                Style="{StaticResource CardView}">
+                               Style="{StaticResource CardView}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToLoadPlaylistCommand}"/>
+                            </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="*"
                                   RowDefinitions="100,25,100">
                                 <Image Grid.Row="0"
@@ -104,34 +106,42 @@
         </ScrollView>
         <Label Grid.Row="4" Text="Seleccion Rapida" Margin="0,0,0,10"
             FontAttributes="Bold" Style="{StaticResource MediumLabel}"/>
-        <ScrollView Grid.Row="5">
-            <CollectionView ItemsSource="{Binding Playlist_item}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate >
-                        <Frame  Padding="2" Margin="2"
-                            Style="{StaticResource CardView}">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding .}"
-                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToMusicPlayerCommand}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="50,*">
-                                <Image Grid.Column="0"
-                                    Source="{Binding track.album.images[0].url}"/>
-                                <Grid Grid.Column="1" RowDefinitions="*,*" Margin="10,0,0,0">
-                                    <Label Grid.Row="0"
-                                       Text="{Binding track.name}"
-                                        FontAttributes="Bold" 
-                                        Style="{StaticResource MediumLabel}"/>
-                                    <Label Grid.Row="1"
-                                       Text="{Binding track.artists[0].name}"
-                                        FontAttributes="Bold" 
-                                        Style="{StaticResource SmallLabel}"/>
+
+        <Grid Grid.Row="5"
+              RowDefinitions="auto,*">
+            <ActivityIndicator IsVisible="{Binding IsBusy}" Grid.Row="0"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+            <ScrollView Grid.Row="1">
+                <CollectionView ItemsSource="{Binding Playlist_item}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate >
+                            <Frame  Padding="2" Margin="2"
+                    Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToMusicPlayerCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="50,*">
+                                    <Image Grid.Column="0"
+                            Source="{Binding track.album.images[0].url}"/>
+                                    <Grid Grid.Column="1" RowDefinitions="*,*" Margin="10,0,0,0">
+                                        <Label Grid.Row="0"
+                               Text="{Binding track.name}"
+                                FontAttributes="Bold" 
+                                Style="{StaticResource MediumLabel}"/>
+                                        <Label Grid.Row="1"
+                               Text="{Binding track.artists[0].name}"
+                                FontAttributes="Bold" 
+                                Style="{StaticResource SmallLabel}"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
     </Grid>
 </ContentPage>
