@@ -25,16 +25,12 @@ namespace MauiApp2
             builder.Services.AddSingleton<IMap>(Map.Default);
 
             builder.Services.AddSingleton<Login>();
-            builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<AccountInfo>(); 
 
-            builder.Services.AddSingleton<UsersViewModel>();
             builder.Services.AddSingleton<MainAccountViewModel>();
-            builder.Services.AddTransient<UserDetailsViewModel>();
             builder.Services.AddTransient<PlayerViewModel>();
 
             builder.Services.AddSingleton<MainPage>();
-		    builder.Services.AddTransient<DetailsPage>();
             builder.Services.AddTransient<MainAccountPage>();
             builder.Services.AddTransient<PlayerPage>();
 
