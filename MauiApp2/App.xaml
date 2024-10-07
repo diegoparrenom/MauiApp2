@@ -18,6 +18,9 @@
             <Color x:Key="CardBackground">white</Color>
             <Color x:Key="CardBackgroundDark">#1f1f1c</Color>
 
+            <Color x:Key="CardBackgroundCustom">#8bc7b6</Color>
+            <Color x:Key="CardBackgroundCustomDark">#21453b</Color>
+
             <Style TargetType="Page" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Light={StaticResource LightBackground},Dark={StaticResource DarkBackground}}" />
@@ -69,6 +72,19 @@
                 <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="IsClippedToBounds" Value="True"/>
+            </Style>
+            <Style x:Key="CardViewCustom" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#DDDDDD"/>
+                <Setter Property="HasShadow" Value="{OnPlatform iOS=false, MacCatalyst=false, Default=true}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackgroundCustom}, Dark={StaticResource CardBackgroundCustomDark}}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+            </Style>
+            <Style x:Key="EntryCustom" TargetType="Entry">
+                <Setter Property="Background" Value="{AppThemeBinding Light=#cadbd5, Dark=#07241a}"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"/>
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

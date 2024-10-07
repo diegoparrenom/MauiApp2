@@ -11,7 +11,6 @@
             <Border Stroke="#C49B33"
                 StrokeThickness="4"
                 StrokeShape="RoundRectangle 40,0,0,40"
-                Background="LightYellow"
                 Padding="8,4"
                 HorizontalOptions="Center">
                 <Grid Grid.Column="0"
@@ -31,7 +30,8 @@
             </Border>
             <Entry x:Name="entry"
                 Grid.Column="1"
-               Placeholder="SearchSong" />
+                Placeholder="SearchSong" 
+                Style="{StaticResource EntryCustom}"/>
             <Image Source="searchicon.png"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand"
@@ -40,8 +40,7 @@
         </Grid>
 
         <ScrollView Grid.Row="1" 
-                    Margin="0,10,0,10"
-                    Background="LightYellow">
+                    Margin="0,10,0,10">
             <CollectionView ItemsSource="{Binding GenresList}"
                             VerticalOptions="Start"
                             ItemsLayout="HorizontalList">
@@ -51,8 +50,7 @@
                             <Frame HeightRequest="30" 
                                 Padding="2" 
                                 Margin="2"
-                                BackgroundColor="BurlyWood"
-                                Style="{StaticResource CardView}">
+                                Style="{StaticResource CardViewCustom}">
                                 <Label Grid.Column="1"
                                     Text="{Binding .}"
                                     FontAttributes="Bold" 
@@ -72,8 +70,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame WidthRequest="150" Padding="2"  Margin="2"
-                               BackgroundColor="LightBlue"
-                               Style="{StaticResource CardView}">
+                               Style="{StaticResource CardViewCustom}">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToLoadPlaylistCommand}"/>
@@ -86,17 +83,14 @@
                                     WidthRequest="100"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
-                                    BackgroundColor="LightBlue"
                                     Source="{Binding images[0].Url}"/>
                                 <Label Grid.Row="1"
                                     Text="{Binding name}"
                                     FontAttributes="Bold" 
-                                    BackgroundColor="LightBlue"
                                     Style="{StaticResource MediumLabel}"/>
                                 <Label Grid.Row="2"
                                        Text="{Binding description}"
                                     FontAttributes="Bold" 
-                                    BackgroundColor="LightBlue"
                                     Style="{StaticResource SmallLabel}"/>
                             </Grid>
                         </Frame>
@@ -118,7 +112,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate >
                             <Frame  Padding="2" Margin="2"
-                    Style="{StaticResource CardView}">
+                                Style="{StaticResource CardView}">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainAccountViewModel}}, Path=GoToMusicPlayerCommand}"/>

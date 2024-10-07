@@ -8,8 +8,16 @@
     <VerticalStackLayout>
         <Grid RowDefinitions="*,*,*,*"
               Padding="20,20,20,20">
-            <Image Grid.Row="0"
-                   Source="{Binding Item.track.album.images[0].url}"/>
+            <Border Grid.Row="0"
+                    StrokeShape="RoundRectangle 60,60,60,60 "
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,0">
+                <Image
+                    Aspect="AspectFit"
+                    Source="{Binding Item.track.album.images[0].url}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center" />
+            </Border>
             <Label Grid.Row="1" 
                    HorizontalOptions="Center"
                    Text="{Binding Item.track.name}"
