@@ -95,6 +95,10 @@ namespace MauiApp2.Services
 
             return playlist;
         }
-        
+
+        public static string testfunction()
+        {
+            return "skdñfj";
+        }
     }
 }
