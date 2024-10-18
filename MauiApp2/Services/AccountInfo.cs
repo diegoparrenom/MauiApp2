@@ -26,8 +26,8 @@ namespace MauiApp2.Services
         {
             httpClient = new HttpClient();
         }
-
-        public async Task<List<string>> GetGenres(string token)
+        //solo para Test //quitar el virtual al ejectuar el proyecto
+        virtual public async Task<List<string>> GetGenres(string token)
         {
             var url = "https://api.spotify.com/v1/recommendations/available-genre-seeds";
 
@@ -44,7 +44,8 @@ namespace MauiApp2.Services
 
             return genresList;
         }
-        public async Task<PlaylistGroup> GetFeaturedPlaylist(string token)
+        //solo para Test //quitar el virtual al ejectuar el proyecto
+        virtual public async Task<PlaylistGroup> GetFeaturedPlaylist(string token)
         {
             var url = "https://api.spotify.com/v1/browse/featured-playlists";
 
@@ -60,8 +61,8 @@ namespace MauiApp2.Services
             }
             return playlist_group;
         }
-
-        public async Task<Playlist> GetSinglePlaylist(string token,string userId)
+        //solo para Test //quitar el virtual al ejectuar el proyecto
+        virtual public async Task<Playlist> GetSinglePlaylist(string token,string userId)
         {
             var url = "https://api.spotify.com/v1/playlists/"+userId;
 
@@ -77,8 +78,8 @@ namespace MauiApp2.Services
             }
             return playlist;
         }
-
-        public async Task<Playlist> getPlayList(string token, string playListId)
+        //solo para Test //quitar el virtual al ejectuar el proyecto
+        virtual public async Task<Playlist> GetPlayList(string token, string playListId)
         {
             var url = "https://api.spotify.com/v1/playlists/" + playListId;
 

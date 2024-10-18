@@ -29,8 +29,8 @@ public class Login
         public string token_type { get; set; }
         public int expires_in { get; set; }
     }
-
-    public async Task<string> GetLogin()
+    //solo para Test //quitar el virtual al ejectuar el proyecto
+    virtual public async Task<string> GetLogin()
     {
         LoginResponse loginResponse = new();
 

@@ -19,7 +19,7 @@ public partial class MainAccountViewModel : BaseViewModel
 
     public ObservableCollection<Playlist.Item> Playlist_item { get; } = new();
 
-    IConnectivity connectivity;
+    readonly IConnectivity connectivity;
 
     public MainAccountViewModel(AccountInfo accountInfo, Login login, IConnectivity connectivity)
     {
@@ -39,12 +39,16 @@ public partial class MainAccountViewModel : BaseViewModel
 
         try
         {
+            if (Shell.Current == null)
+                return;
+
             if (connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await Shell.Current.DisplayAlert("Internet Issue!",
-                     $"Check your internet and try again!", "OK");
+                        $"Check your internet and try again!", "OK");
                 return;
             }
+            
             IsBusy = true;
             Token = await login.GetLogin();
 
@@ -73,7 +77,6 @@ public partial class MainAccountViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-            IsRefreshing = false;
         }
     }
     [RelayCommand]
@@ -103,7 +106,14 @@ public partial class MainAccountViewModel : BaseViewModel
 
             Playlist_item.Clear();
 
-            var play_list = await accountInfo.getPlayList(Token, item.id);
+            var play_list = await accountInfo.GetPlayList(Token, item.id);
+
+            if (play_list == null)
+                return;
+
+            if (play_list.tracks == null)
+                return;
+            
             foreach (var playlist_item in play_list.tracks.items)
                 Playlist_item.Add(playlist_item);
         }
@@ -116,7 +126,6 @@ public partial class MainAccountViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-            IsRefreshing = false;
         }
 
     }
